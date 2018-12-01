@@ -53,6 +53,7 @@ public class Utility {
 					City city = new City();
 					city.setCityCode(array[0]);
 					city.setCityName(array[1]);
+					city.setProvinceId(provinceId);
 					// 将解析出来的数据存储到City表
 					coolWeatherDB.saveCity(city);
 				}
@@ -75,6 +76,7 @@ public class Utility {
 					County county = new County();
 					county.setCountyCode(array[0]);
 					county.setCountyName(array[1]);
+					county.setCityId(cityId);
 					// 将解析出来的数据存储到County表
 					coolWeatherDB.saveCounty(county);
 				}
@@ -89,7 +91,7 @@ public class Utility {
 	 */
 	public static void handleWeatherResponse(Context context, String response) {
 		try {
-			JSONObject jsonObject = new JSONObject();
+			JSONObject jsonObject = new JSONObject(response);
 			JSONObject weatherInfo = jsonObject.getJSONObject("weatherinfo");
 			String cityName = weatherInfo.getString("city");
 			String weatherCode = weatherInfo.getString("cityid");
